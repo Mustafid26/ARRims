@@ -1,48 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Menu</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+@extends('layouts.app')
 
-    <!-- Custom CSS -->
-    {{-- <link rel="stylesheet" href="css/custom.css"> --}}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-</head>
-<body>
+@section('title', 'Beranda')
+
+@section('content')
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
-        <div class="container">
-            <div class="row d-flex justify-content-between">
-                <div class="col-2">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Home</a>
-                                <a class="nav-link" href="#">Profile</a>
-                                <a class="nav-link" href="#">Setting</a>
-                                <a class="nav-link" href="#">Cart</a>
-                                <a class="nav-link" href="#">Logout</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-9">
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success gradient-btn-search" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        
-    </nav>
+    @include('layouts.navbar')
 
     <!-- Banner -->
     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
@@ -110,76 +72,20 @@
         <div class="row g-4" style="margin-bottom: 25%;">
             <!-- Product Card -->
             <div class="col-6 col-md-3">
-                <div class="card shadow-sm border-0">
-                    <img src="{{ asset('img/velg-mobil.png') }}" class="card-img-top" alt="Product">
-                    <div class="card-body text-center">
-                        <p class="card-title mb-1 fw-bold text-start">Lorem ipsum dolor sit amet</p>
-                        <p class="card-text text-muted mb-0 text-start ">Rp. 928.5</p>
+                <a href="{{ route('ar') }}">
+                    <div class="card shadow-sm border-0">
+                        <img src="{{ asset('img/velg-mobil.png') }}" class="card-img-top" alt="Product">
+                        <div class="card-body text-center">
+                            <p class="card-title mb-1 fw-bold text-start">Lorem ipsum dolor sit amet</p>
+                            <p class="card-text text-muted mb-0 text-start">Rp. 928.5</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
-            <div class="col-6 col-md-3">
-                <div class="card shadow-sm border-0">
-                    <img src="{{ asset('img/velg-mobil.png') }}" class="card-img-top" alt="Product">
-                    <div class="card-body text-center">
-                        <p class="card-title mb-1 fw-bold text-start">Lorem ipsum dolor sit amet</p>
-                        <p class="card-text text-muted mb-0 text-start">Rp. 928.5</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="card shadow-sm border-0">
-                    <img src="{{ asset('img/velg-mobil.png') }}" class="card-img-top" alt="Product">
-                    <div class="card-body text-center">
-                        <p class="card-title mb-1 fw-bold text-start">Lorem ipsum dolor sit amet</p>
-                        <p class="card-text text-muted mb-0 text-start">Rp. 928.5</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="card shadow-sm border-0">
-                    <img src="{{ asset('img/velg-mobil.png') }}" class="card-img-top" alt="Product">
-                    <div class="card-body text-center">
-                        <p class="card-title mb-1 fw-bold text-start">Lorem ipsum dolor sit amet</p>
-                        <p class="card-text text-muted mb-0 text-start">Rp. 928.5</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="card shadow-sm border-0">
-                    <img src="{{ asset('img/velg-mobil.png') }}" class="card-img-top" alt="Product">
-                    <div class="card-body text-center">
-                        <p class="card-title mb-1 fw-bold text-start">Lorem ipsum dolor sit amet</p>
-                        <p class="card-text text-muted mb-0 text-start">Rp. 928.5</p>
-                    </div>
-                </div>
-            </div>
-            
         </div>
     </div>
 
-    <!-- Footer Navigation -->
-    <nav class="navbar fixed-bottom bg-white  rounded-top-5" style="box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2); margin: 0; padding: 0;">
-        <div class="container d-flex justify-content-around rounded-top-5">
-            <a href="#" class="text-decoration-none text-dark">
-                <div class="text-center">
-                    <img src="{{ asset('img/home.png') }}" alt="Home" style="width: 30px;">
-                    <p class="small m-0">Home</p>
-                </div>
-            </a>
-            <a href="#" class="text-decoration-none">
-                <div class="text-center">
-                    <img src="{{ asset('img/wheel.png') }}" alt="Wheels" style="transform: translateY(-50%);" width="70px"  >
-                </div>
-            </a>
-            <a href="#" class="text-decoration-none text-dark">
-                <div class="text-center">
-                    <img src="{{ asset('img/profile.png') }}" alt="Profile" style="width: 30px;">
-                    <p class="small m-0">Profile</p>
-                </div>
-            </a>
-        </div>
-    </nav>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -201,5 +107,5 @@
         wrapper.scrollBy({ left: 200, behavior: 'smooth' });
     });
     </script>
-</body>
-</html>
+
+@endsection
