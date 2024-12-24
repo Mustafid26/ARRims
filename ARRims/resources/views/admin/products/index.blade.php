@@ -10,9 +10,11 @@
     <table class="table">
         <thead>
             <tr>
+                <th>No</th>
                 <th>Title</th>
                 <th>Price</th>
                 <th>Image</th>
+                <th>Model</th>
                 <th>Actions</th>
             </tr>
         </thead>

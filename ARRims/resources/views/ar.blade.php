@@ -1,56 +1,34 @@
 @extends('layouts.app')
 
-@section('title', 'AR')
+@section('title', 'AR Detection - Wheel')
 
 @section('content')
-
-    <!-- Container -->
+    <!-- Include A-Frame and AR.js -->
     <div class="container text-center mt-5">
+        <!-- Header -->
+        <h1 class="mb-4">AR Detection - Wheel</h1>
 
-        <!-- Main Image -->
-        <div class="main-imageVideo mb-4">
-            <video id="camera-stream" class="videoCamera img-fluid shadow rounded" autoplay   style="width: 100vw; height: 80vh; object-fit: cover;"></video>
-            <button id="switch-camera" class="btn btn-secondary mt-2 mb-5">Ganti Kamera</button>
+        <div class="arjs-loader">
+            <div>Loading, please wait...</div>
         </div>
-        
-        
-        </div>
+        <a-scene
+            vr-mode-ui="enabled: false;"
+            renderer="logarithmicDepthBuffer: true; precision: medium;"
+            embedded
+            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+        >
+            <!-- Marker-based AR (using a traditional marker) -->
+            <a-marker type="pattern" url="{{ asset('marker/wheel.patt') }}">
+                <a-entity
+                    gltf-model="{{ asset('models/scene.gltf') }}"
+                    scale="5 5 5"
+                    position="150 300 -100"
+                >
+                </a-entity>
+            </a-marker>
 
-
-
-    <!-- Bootstrap JS Bundle -->
-    
-    <script>
-        const video = document.getElementById('camera-stream');
-const switchCameraBtn = document.getElementById('switch-camera');
-let currentFacingMode = "user"; // Default: Kamera depan
-
-async function openCamera(facingMode) {
-    try {
-        // Hentikan stream sebelumnya jika ada
-        if (video.srcObject) {
-            video.srcObject.getTracks().forEach(track => track.stop());
-        }
-
-        // Buka kamera dengan parameter facingMode
-        const stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: facingMode }
-        });
-        video.srcObject = stream;
-    } catch (error) {
-        alert('Tidak dapat membuka kamera: ' + error.message);
-    }
-}
-
-// Tombol untuk mengganti kamera
-switchCameraBtn.addEventListener('click', () => {
-    currentFacingMode = currentFacingMode === "user" ? "environment" : "user";
-    openCamera(currentFacingMode);
-});
-
-// Buka kamera saat halaman dimuat
-openCamera(currentFacingMode);
-
-    </script>
-
+            <!-- Camera -->
+            <a-entity camera></a-entity>
+        </a-scene>
+    </div>
 @endsection

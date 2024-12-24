@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
@@ -42,25 +43,27 @@ class ProductController extends Controller
             'title' => 'required', // Pastikan kolom title ada
             'price' => 'required|numeric', // Validasi harga produk
             'image' => 'required|image', // Validasi gambar
-            'model' => 'nullable|file|mimes:glb,gltf|max:20480', // Validasi file GLB/GLTF
+            'model' => 'nullable|file' // Validasi file GLB/GLTF
         ]);
 
         // Penyimpanan gambar (image)
         $imagePath = $request->file('image')->store('images', 'public'); // Penyimpanan di folder 'images'
 
         // Penyimpanan model 3D (GLB/GLTF)
-        $modelPath = null;
         if ($request->hasFile('model')) {
-            $modelPath = $request->file('model')->store('models', 'public'); // Penyimpanan di folder 'models'
-        }
-
-        // Menyimpan data produk ke dalam database
+            $file = $request->file('model');
+            Log::info('Model file detected: ' . $file->getClientOriginalName());
+        
+            $modelPath = $file->store('models', 'public');
+            Log::info('Model stored at: ' . $modelPath);
+        }        
         Product::create([
             'title' => $request->title,
             'price' => $request->price,
             'image' => $imagePath,
             'model' => $modelPath, // Simpan path ke file model (nullable)
         ]);
+        // Menyimpan data produk ke dalam database
 
         // Redirect setelah berhasil menyimpan data
         return redirect()->route('admin.products.index');
@@ -70,58 +73,58 @@ class ProductController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-{
-    // Ambil produk berdasarkan ID
-    $product = Product::findOrFail($id);
+    {
+        // Ambil produk berdasarkan ID
+        $product = Product::findOrFail($id);
 
-    // Kirimkan data produk ke view
-    return view('admin.products.show', compact('product'));
-}
+        // Kirimkan data produk ke view
+        return view('admin.products.show', compact('product'));
+    }
 
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-{
-    // Ambil produk berdasarkan ID
-    $product = Product::findOrFail($id);
+    {
+        // Ambil produk berdasarkan ID
+        $product = Product::findOrFail($id);
 
-    // Kirimkan data produk ke view
-    return view('admin.products.edit', compact('product'));
-}
+        // Kirimkan data produk ke view
+        return view('admin.products.edit', compact('product'));
+    }
 
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Product $product)
-{
-    $request->validate([
-        'title' => 'required',
-        'price' => 'required|numeric',
-        'image' => 'nullable|image',
-        'model' => 'nullable|mimes:glb,gltf',
-    ]);
+    {
+        $request->validate([
+            'title' => 'required',
+            'price' => 'required|numeric',
+            'image' => 'nullable|image',
+            'model' => 'nullable|mimes:glb,gltf',
+        ]);
 
-    $data = [
-        'title' => $request->title,
-        'price' => $request->price,
-    ];
+        $data = [
+            'title' => $request->title,
+            'price' => $request->price,
+        ];
 
-    if ($request->hasFile('image')) {
-        $data['image'] = $request->file('image')->store('images');
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('images');
+        }
+
+        if ($request->hasFile('model')) {
+            $data['model'] = $request->file('model')->store('models');
+        }
+
+        $product->update($data);
+
+        return redirect()->route('admin.products.index')
+            ->with('success', 'Product updated successfully');
     }
-
-    if ($request->hasFile('model')) {
-        $data['model'] = $request->file('model')->store('models');
-    }
-
-    $product->update($data);
-
-    return redirect()->route('admin.products.index')
-        ->with('success', 'Product updated successfully');
-}
 
 
     /**

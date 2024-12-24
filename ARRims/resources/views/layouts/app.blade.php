@@ -11,6 +11,10 @@
     <!-- Custom CSS -->
     {{-- <link rel="stylesheet" href="css/custom.css"> --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <!-- Include THREE.js sebelum A-Frame dan AR.js -->
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.6.0/dist/aframe-master.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
 </head>
 <body>
     @yield('content')

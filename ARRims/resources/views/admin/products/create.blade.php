@@ -26,7 +26,6 @@
                 <label for="model">Model (GLB/GLTF)</label>
                 <input type="file" name="model" id="model" class="form-control" >
             </div>
-
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
