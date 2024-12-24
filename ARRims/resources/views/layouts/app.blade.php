@@ -24,11 +24,7 @@
                     <p class="small m-0">Home</p>
                 </div>
             </a>
-            <a href="#" class="text-decoration-none">
-                <div class="text-center">
-                    <img src="{{ asset('img/wheel.png') }}" alt="Wheels" style="transform: translateY(-50%);" width="70px"  >
-                </div>
-            </a>
+            
             <a href="#" class="text-decoration-none text-dark">
                 <div class="text-center">
                     <img src="{{ asset('img/profile.png') }}" alt="Profile" style="width: 30px;">
