@@ -26,5 +26,5 @@ Route::get('/ar/{id}', [ProductController::class, 'ar'])->name('ar.show');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('products', ProductController::class); // CRUD produk tanpa autentikasi
+    Route::resource('products', ProductController::class); 
 });
