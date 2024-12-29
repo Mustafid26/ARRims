@@ -65,7 +65,7 @@
         </a-marker>
     </a-scene>
 </div>
-<script>
+{{-- <script>
     // Fungsi untuk memulai deteksi objek menggunakan kamera A-Frame
     function startObjectDetection(cameraElement) {
         // Ambil stream video dari kamera A-Frame
@@ -115,6 +115,6 @@
             console.error('No a-scene element found');
         }
     };
-</script>
+</script> --}}
 
 @endsection
